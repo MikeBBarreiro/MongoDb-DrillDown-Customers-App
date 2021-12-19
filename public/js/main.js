@@ -259,6 +259,7 @@ $(document).ready(function() {
 
     $(document).on('click', '.updateHardware', function (e) {
         var tdClasses = $(this).attr('class').split(' ');
+        var hardwareId = $(this).attr('id')
         var hardwareName = $('#hardwareRow' + tdClasses[1] + ' > .hardwareTd' + tdClasses[1] + ' > .hardwareName').val();
         var hardwareDescription = $('#hardwareRow' + tdClasses[1] + ' > .hardwareTd' + tdClasses[1] + ' > .hardwareDescription').val();
         var ipAddress = $('#hardwareRow' + tdClasses[1] + ' > .hardwareTd' + tdClasses[1] + ' > .ipAddress').val();
@@ -275,7 +276,7 @@ $(document).ready(function() {
             username: hardwareUsername,
             password: hardwarePassword
         }
-        updateHardware(tdClasses[1], newObj);
+        updateHardware(tdClasses[1], newObj, hardwareId);
     });
     
     $(document).on('click', '#submitFuzzySearch', function (e) {
@@ -541,7 +542,7 @@ function renderHardwareDetails(id, jobId){
             // $('.mainTableForHardware').remove();
             selectedJobDetails.hardware.forEach(function(data, i){
                 var table = 
-                `<tr id="hardwareRow`+ data._id +`">
+                `<tr id="hardwareRow`+ data._id +`" class="` + data.parentId + `">
                     <td class="hardwareTd` + data._id + `" id="` + data._id + `"><span>` + data.name + `</span><input placeholder="` + data.name + `" value="` + data.name + `" class="hardwareName" style="display:none"/></td>
                     <td class="hardwareTd` + data._id + `"><span>` + data.description + `</span><textarea placeholder="` + data.description + `" value="` + data.description + `" class="hardwareDescription" style="display:none"></textarea></td>
                     <td class="hardwareTd` + data._id + `">
@@ -560,7 +561,7 @@ function renderHardwareDetails(id, jobId){
                     <td class="hardwareTd` + data._id + `"><span>` + data.password + `</span><input placeholder="` + data.password + `" value="` + data.password + `" class="hardwarePassword" style="display:none"/></td>
                     <td class="deleteHardware ` + data._id + ` dc" id="associatedUpper-` + selectedJobDetails._id + `" value="` + data._id + `">DELETE</td>
                     <td class="editHardware ` + data._id + ` es" value="` + data._id + `">EDIT</td>
-                    <td style="display: none;" class="updateHardware ` + data._id + `">SAVE</td>
+                    <td style="display: none;" class="updateHardware ` + data._id + `" id="` + data.parentId + `">SAVE</td>
                 </tr>`;
                 $('.hardwareTbody').append(table);
             });
@@ -581,7 +582,7 @@ function jobEdit(tdClasses){
     $('#jobRow' + tdClasses[1] + ' > .editJob').css('display', 'none');
 
     $('#jobRow' + tdClasses[1] + ' > .jobTd' + tdClasses[1] + ' > input').css('display', 'block');
-    $('#jobRow' + tdClasses[1] + ' > .jobTd' + tdClasses[1] + ' > textarea').css('display', '');
+    $('#jobRow' + tdClasses[1] + ' > .jobTd' + tdClasses[1] + ' > textarea').css('display', 'block');
     $('#jobRow' + tdClasses[1] + ' > .jobTd' + tdClasses[1] + ' > textarea').val($('#jobRow' + tdClasses[1] + ' > .jobTd' + tdClasses[1] + ':nth-child(6) > span').text());
     $('#jobRow' + tdClasses[1] + ' > .updateJob').css('display', 'revert');
 }
@@ -656,12 +657,13 @@ function editCustomer(customerId, updatedObj){
     });
 }
 
-function updateHardware(hardwareId, updatedHardware){
+function updateHardware(hardwareId, updatedHardware, parentId){
+    console.log(updatedHardware);
     $.ajax({
         method: 'PUT',
         dateType: 'json',
         url: 'http://localhost:3000/updateHardware', //URL OR ENDPOINT
-        data: {"id": hardwareId, updatedHardware: updatedHardware},
+        data: {"id": parentId, "updatedHardware": updatedHardware, "hId": hardwareId},
         success: function (res){
             if(res){
                 var dataResponse = JSON.parse(res);
@@ -679,10 +681,11 @@ function updateHardware(hardwareId, updatedHardware){
                 $('.deleteJob.' + hardwareId).removeClass('cancelEditingHardware');
                 
                 $('#hardwareRow' + hardwareId + ' > .hardwareTd' + hardwareId + ' > span').css('display', '');
-                $('#hardwareRow' + hardwareId + ' > .editJob').css('display', '');
+                $('#hardwareRow' + hardwareId + ' > .editHardware').css('display', '');
     
                 $('#hardwareRow' + hardwareId + ' > .hardwareTd' + hardwareId + ' > input').css('display', 'none');
-                $('#hardwareRow' + hardwareId + ' > .updateJob').css('display', 'none');
+                $('#hardwareRow' + hardwareId + ' > .hardwareTd' + hardwareId + ' > textarea').css('display', 'none');
+                $('#hardwareRow' + hardwareId + ' > .updateHardware').css('display', 'none');
                 var toastLiveExample = document.getElementById('liveToast');
                 var toast = new bootstrap.Toast(toastLiveExample)
                 toast.show();
@@ -707,7 +710,7 @@ function hardwareEdit(tdClasses){
 
     $('.hardwareSelect#' + tdClasses[1] + ' > input').css('display', 'block'); //for first TD
     $('#hardwareRow' + tdClasses[1] + ' > .hardwareTd' + tdClasses[1] + ' > input').css('display', 'block');
-    $('#hardwareRow' + tdClasses[1] + ' > .hardwareTd' + tdClasses[1] + ' > textarea').css('display', '');
+    $('#hardwareRow' + tdClasses[1] + ' > .hardwareTd' + tdClasses[1] + ' > textarea').css('display', 'block');
     $('#hardwareRow' + tdClasses[1] + ' > .hardwareTd' + tdClasses[1] + ' > textarea').val($('#hardwareRow' + tdClasses[1] + ' > .hardwareTd' + tdClasses[1] + ':nth-child(2) > span').text());
     $('#hardwareRow' + tdClasses[1] + ' > .updateHardware').css('display', 'revert');
 }

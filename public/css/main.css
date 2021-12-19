@@ -183,7 +183,7 @@ td > span {white-space: nowrap;}
 }
 
 .hardwareTbody > tr > td:nth-child(2){
-    max-width: 275px
+    max-width: 250px
 }
 
 #fuzzysearcher{

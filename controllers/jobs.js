@@ -105,7 +105,8 @@ router.post("/addHardware", (req, res) => {
 });
 
 router.put("/updateHardware", (req, res) => {
-    JobModel.updateOne({_id: req.body.id}, {$set: req.body.updatedHardware}, (err, docs) => {
+    JobModel.updateOne({'hardware._id': ObjectId(req.body.hId)}, {$set: {'hardware.$[]': req.body.updatedHardware}}, (err, docs) => {
+        // hardware.$[] will modify the entire object within the hardware array instead of one value likehardware.$[].username for example.
         if(!err){
             res.send(JSON.stringify({data: docs, updatedData: req.body.updatedHardware}));
         }else{
