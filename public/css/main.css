@@ -114,9 +114,11 @@ table > tbody > tr > td {vertical-align: middle;}
     width: 100%;
 }
 
-td > input {
-    width: 100%;
-}
+td > input {width: 100%;}
+
+td > textarea{ width: 100%;}
+
+td > span {white-space: nowrap;}
 
 .tableLoader{
     position: absolute;
@@ -145,11 +147,14 @@ td > input {
 .additionalCustomerInfoTable > tbody > tr > td{
     border: transparent !important;
     font-weight: 300;
+    padding: 0 2px !important;
 }
 
 .addCustomerBtn{
+    position: absolute;
+    border: 4px solid #3bcb687a !important;
     padding: 5px !important;
-    margin: 15px !important;
+    margin: 11px !important;
     vertical-align: middle;
     border-radius: 0 !important;
 }

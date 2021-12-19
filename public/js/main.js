@@ -46,9 +46,6 @@ $(document).ready(function() {
                 if (word.value.length === 0) {
                     return word.id;
                 }
-                if(word.value.length === 0 || word.value.length < 4 && word.id === 'createCustomerCode'){
-                    return word.id;
-                }
                 if(word.value.length === 0 || word.value.length < 4 && word.id === 'CreateCustomerZIP'){
                     return word.id;
                 }
@@ -211,10 +208,11 @@ $(document).ready(function() {
             $('.' + tdClasses[0] + '.dc').text('DELETE');
         }
 
-        $('#jobRow' + tdClasses[0] + ' > .jobTd' + tdClasses[0] + ' > span').css('display', 'block');
+        $('#jobRow' + tdClasses[0] + ' > .jobTd' + tdClasses[0] + ' > span').css('display', '');
         $('#jobRow' + tdClasses[0] + ' > .editJob').css('display', '');
 
         $('#jobRow' + tdClasses[0] + ' > .jobTd' + tdClasses[0] + ' > input').css('display', 'none');
+        $('#jobRow' + tdClasses[0] + ' > .jobTd' + tdClasses[0] + ' > textarea').css('display', 'none');
         $('#jobRow' + tdClasses[0] + ' > .updateJob').css('display', 'none');
     });
 
@@ -238,6 +236,7 @@ $(document).ready(function() {
 
         $('.hardwareSelect#' + tdClasses[0] + ' > input').css('display', 'none'); //for first TD
         $('#hardwareRow' + tdClasses[0] + ' > .hardwareTd' + tdClasses[0] + ' > input').css('display', 'none');
+        $('#hardwareRow' + tdClasses[0] + ' > .hardwareTd' + tdClasses[0] + ' > textarea').css('display', 'none');
         $('#hardwareRow' + tdClasses[0] + ' > .updateHardware').css('display', 'none');
     });
     
@@ -390,8 +389,8 @@ function fetchCustomers() {
                                     '<div class="customer-actions-container">' +
                                         '<table class="additionalCustomerInfoTable">' +
                                             '<tr>' +
-                                                '<td>' + data.address + ', </td>' + 
-                                                '<td> ' + data.city + '</td>' + 
+                                                '<td>' + data.address + ' </td>' + 
+                                                '<td> ' + data.city + ', </td>' + 
                                                 '<td> ' + data.state + '</td>' + 
                                                 '<td> ' + data.zip + '</td>' + 
                                             '</tr>' +
@@ -468,7 +467,7 @@ function fetchJobs(id){
                         '<td class="jobTd' + data._id + '"><span>' + data.connectionNum + '</span><input placeholder="' + data.connectionNum + '" value="' + data.connectionNum + '" class="connectionNum" style="display:none" /></td>' +
                         '<td class="jobTd' + data._id + '"><span>' + data.username + '</span><input placeholder="' + data.username + '" value="' + data.username + '" class="username" style="display:none" /></td>' +
                         '<td class="jobTd' + data._id + '"><span>' + data.password + '</span><input placeholder="' + data.password + '" value="' + data.password + '"  class="password" style="display:none" /></td>' +
-                        '<td class="jobTd' + data._id + '" style="white-space:nowrap;"><span>' + data.additionalInfo + '</span><input placeholder="' + data.additionalInfo + '" value="' + data.additionalInfo + '"  class="additionalInfo" style="display:none" /></td>' +
+                        '<td class="jobTd' + data._id + '" style="white-space:nowrap;"><span>' + data.additionalInfo + '</span><textarea placeholder="' + data.additionalInfo + '" value="' + data.additionalInfo + '"  class="additionalInfo" style="display:none" ></textarea></td>' +
                         '<td class="deleteJob ' + data._id + ' dc" id="associatedUpper-' + id + '" value="' + data._id + '">DELETE</td>' +
                         '<td class="editJob ' + data._id + ' es">EDIT</td>' +
                         '<td style="display: none;" class="updateJob ' + data._id + '">SAVE</td>' +
@@ -544,7 +543,7 @@ function renderHardwareDetails(id, jobId){
                 var table = 
                 `<tr id="hardwareRow`+ data._id +`">
                     <td class="hardwareTd` + data._id + `" id="` + data._id + `"><span>` + data.name + `</span><input placeholder="` + data.name + `" value="` + data.name + `" class="hardwareName" style="display:none"/></td>
-                    <td class="hardwareTd` + data._id + `"><span>` + data.description + `</span><input placeholder="` + data.description + `" value="` + data.description + `" class="hardwareDescription" style="display:none"/></td>
+                    <td class="hardwareTd` + data._id + `"><span>` + data.description + `</span><textarea placeholder="` + data.description + `" value="` + data.description + `" class="hardwareDescription" style="display:none"></textarea></td>
                     <td class="hardwareTd` + data._id + `">
                         <span>` + data.ipAddress + `</span>
                         <input placeholder="` + data.ipAddress + `" value="` + data.ipAddress + `" class="ipAddress" style="display:none"  minlength="7" maxlength="15" size="15" pattern="^((\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.){3}(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$"/>
@@ -582,6 +581,8 @@ function jobEdit(tdClasses){
     $('#jobRow' + tdClasses[1] + ' > .editJob').css('display', 'none');
 
     $('#jobRow' + tdClasses[1] + ' > .jobTd' + tdClasses[1] + ' > input').css('display', 'block');
+    $('#jobRow' + tdClasses[1] + ' > .jobTd' + tdClasses[1] + ' > textarea').css('display', '');
+    $('#jobRow' + tdClasses[1] + ' > .jobTd' + tdClasses[1] + ' > textarea').val($('#jobRow' + tdClasses[1] + ' > .jobTd' + tdClasses[1] + ':nth-child(6) > span').text());
     $('#jobRow' + tdClasses[1] + ' > .updateJob').css('display', 'revert');
 }
 
@@ -609,6 +610,7 @@ function updateEditedJob(jobId, updatedObj){
                 $('#jobRow' + jobId + ' > .editJob').css('display', '');
     
                 $('#jobRow' + jobId + ' > .jobTd' + jobId + ' > input').css('display', 'none');
+                $('#jobRow' + jobId + ' > .jobTd' + jobId + ' > textarea').css('display', 'none');
                 $('#jobRow' + jobId + ' > .updateJob').css('display', 'none');
                 var toastLiveExample = document.getElementById('liveToast');
                 var toast = new bootstrap.Toast(toastLiveExample)
@@ -705,6 +707,8 @@ function hardwareEdit(tdClasses){
 
     $('.hardwareSelect#' + tdClasses[1] + ' > input').css('display', 'block'); //for first TD
     $('#hardwareRow' + tdClasses[1] + ' > .hardwareTd' + tdClasses[1] + ' > input').css('display', 'block');
+    $('#hardwareRow' + tdClasses[1] + ' > .hardwareTd' + tdClasses[1] + ' > textarea').css('display', '');
+    $('#hardwareRow' + tdClasses[1] + ' > .hardwareTd' + tdClasses[1] + ' > textarea').val($('#hardwareRow' + tdClasses[1] + ' > .hardwareTd' + tdClasses[1] + ':nth-child(2) > span').text());
     $('#hardwareRow' + tdClasses[1] + ' > .updateHardware').css('display', 'revert');
 }
 
@@ -734,9 +738,6 @@ function addJob(id){
         || PasswordValue.length === 0){
         const validate = a.filter((word, i) => {
             if (word.value.length === 0) {
-                return word.id;
-            }
-            if(word.value.length === 0 || word.value.length < 4 && word.id === 'addJobJobNumber'){
                 return word.id;
             }
         });
@@ -794,7 +795,7 @@ function addJob(id){
                         '<td class="jobTd' + data.jobId + '"><span>' + data.connectionNum + '</span><input placeholder="' + data.connectionNum + '" value="' + data.connectionNum + '" class="connectionNum" style="display:none" /></td>' +
                         '<td class="jobTd' + data.jobId + '"><span>' + data.username + '</span><input placeholder="' + data.username + '" value="' + data.username + '" class="username" style="display:none" /></td>' +
                         '<td class="jobTd' + data.jobId + '"><span>' + data.password + '</span><input placeholder="' + data.password + '" value="' + data.password + '"  class="password" style="display:none" /></td>' +
-                        '<td class="jobTd' + data.jobId + '" style="white-space:nowrap;"><span>' + data.additionalInfo + '</span><input placeholder="' + data.additionalInfo + '" value="' + data.additionalInfo + '"  class="additionalInfo" style="display:none" /></td>' +
+                        '<td class="jobTd' + data.jobId + '" style="white-space:nowrap;"><span>' + data.additionalInfo + '</span><textarea placeholder="' + data.additionalInfo + '" value="' + data.additionalInfo + '"  class="additionalInfo" style="display:none" ></textarea></td>' +
                         '<td class="deleteJob ' + data.jobId + ' dc" id="associatedUpper-' + data.parentId + '" value="' + data.jobId + '">DELETE</td>' +
                         '<td class="editJob ' + data.jobId + ' es" value="' + data.jobId + '">EDIT</td>' +
                         '<td style="display: none;" class="updateJob ' + data.jobId + '">SAVE</td>' +
@@ -944,7 +945,7 @@ function createHardware(jobId, customerId){
                 var hardwareTableRowHTML = 
                 `<tr id="hardwareRow`+ res.data._id +`">
                     <td class="hardwareTd` + res.data._id + `" id="` + res.data._id + `"><span>` + res.data.name + `</span><input placeholder="` + res.data.name + `" value="` + res.data.name + `" class="ipAddress" style="display:none"/></td>
-                    <td class="hardwareTd` + res.data._id + `"><span>` + res.data.description + `</span><input placeholder="` + res.data.description + `" value="` + res.data.description + `" class="description" style="display:none"/></td>
+                    <td class="hardwareTd` + res.data._id + `"><span>` + res.data.description + `</span><textarea placeholder="` + res.data.description + `" value="` + res.data.description + `" class="description" style="display:none"></textarea></td>
                     <td class="hardwareTd` + res.data._id + `"><span>` + res.data.ipAddress + `</span><input placeholder="` + res.data.ipAddress + `" value="` + res.data.ipAddress + `" class="ipAddress" style="display:none"/></td>
                     <td class="hardwareTd` + res.data._id + `"><span>` + res.data.subnetMask + `</span><input placeholder="` + res.data.subnetMask + `" value="` + res.data.subnetMask + `" class="subnetMask" style="display:none"/></td>
                     <td class="hardwareTd` + res.data._id + `"><span>` + res.data.defaultGateway + `</span><input placeholder="` + res.data.defaultGateway + `" value="` + res.data.defaultGateway + `" class="defaultGateway" style="display:none"/></td>
