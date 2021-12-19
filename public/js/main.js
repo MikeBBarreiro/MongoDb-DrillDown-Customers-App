@@ -1,15 +1,4 @@
 $(document).ready(function() {
-    // var isKeyPressed = {
-    //     a: false, // ASCII code for 'a'
-    //     r: false // ASCII code for 'b'
-    //     // ... Other keys to check for custom key combinations
-    //   };
-    // document.onkeydown = (keyDownEvent) => { 
-    //     isKeyPressed[keyDownEvent.key] = true;
-    //     if (keyDownEvent.shiftKey && isKeyPressed["a"] && isKeyPressed["r"]) {
-    //         $('.accordion-item').css('display', '');
-    //     };
-    // }
     $('#fuzzysearcher > .input-group > input').on('keyup', function (e) {
         if (e.key === 'Enter' || e.keyCode === 13) {
             var value = $('#fuzzysearcher > .input-group > input').val();
@@ -26,6 +15,7 @@ $(document).ready(function() {
     $(document).on('click', '.validaitonErrorInput', function (e) {
         $(this).removeClass('validaitonErrorInput');
     });
+
     //We must watch the document for clicks, sense the HTML selected is programatically generated.
     $(document).on('click', '.accordion-item', function (e) {
         var id = $(this).attr('id');
@@ -35,9 +25,6 @@ $(document).ready(function() {
     });
     
     $(document).on('click', '#createCustomer', function (e) {
-        // var id = $(this).attr('id');
-        // e.preventDefault();
-        // console.log(e);
         var customerName = $('#createCustomerName').val();
         var customerCode = $('#createCustomerCode').val();
         var customerCity = $('#createCustomerCity').val();
@@ -65,7 +52,6 @@ $(document).ready(function() {
                 if(word.value.length === 0 || word.value.length < 4 && word.id === 'CreateCustomerZIP'){
                     return word.id;
                 }
-                // return word.length === 0
             });
             for(var i = 0; i < validate.length; i++){
                 $('#' + validate[i].id).addClass('validaitonErrorInput');
@@ -90,7 +76,6 @@ $(document).ready(function() {
             var customerSelected = $('#' + selectedAction[1] + '.accordion-item > .accordion-header > button > span:nth-child(2)').text();
             var modalContentHTML = '<button id="' + selectedAction[1] + '" style="margin: 10px;" class="submitNewJob btn btn-primary">Create job for ' + customerSelected + '</button>'
             $('#addAJob-Modal > .modal-dialog > .modal-content > .modal-body > .formBody').append(modalContentHTML);
-            // addJob(selectedAction[1]);
         }else if(selectedAction[0] === 'editCustomer'){
             $('#editCustomerModal').modal('show');
 
@@ -98,11 +83,6 @@ $(document).ready(function() {
             var city = $('.accordion-item#' + selectedAction[1] + ' > .accordion-collapse > .accordion-body > .customer-actions-container > .additionalCustomerInfoTable > tbody > tr > td:nth-child(2)').text();
             var state = $('.accordion-item#' + selectedAction[1] + ' > .accordion-collapse > .accordion-body > .customer-actions-container > .additionalCustomerInfoTable > tbody > tr > td:nth-child(3)').text();
             var zip = $('.accordion-item#' + selectedAction[1] + ' > .accordion-collapse > .accordion-body > .customer-actions-container > .additionalCustomerInfoTable > tbody > tr > td:nth-child(4)').text();
-            // var city = $('.additionalCustomerInfoTable > tbody > tr > td:nth-child(2)').val();
-            // var state = $('.additionalCustomerInfoTable > tbody > tr > td:nth-child(3)').val();
-            // var zip = $('.additionalCustomerInfoTable > tbody > tr > td:nth-child(4)').val();
-            // var customerTitle = $('.CustomerTitle').text();
-
             var customerTitle = $('.accordion-item#' + selectedAction[1] + ' > .accordion-header > .accordion-button > .CustomerTitle').text();
             var customerCode = $('.accordion-item#' + selectedAction[1] + ' > .accordion-header > .accordion-button > .CustomerCode').text();
 
@@ -112,17 +92,9 @@ $(document).ready(function() {
             $('#editCustomerZIP').val(zip.trim());
             $('#editCustomerState').val(state.trim());
             $('#editCustomerCode').val(customerCode.split(':')[1]);
-            
+
             var customerEditBtn = '<button type="button" class="btn btn-primary" id="editCustomer" value="' + selectedAction[1] + '">Edit Customer</button>'
-
-            // var modalContentHTML = '<button id="' + selectedAction[1] + '" style="margin: 10px;" class="submitNewJob btn btn-primary">Create job for ' + customerSelected + '</button>'
             $('.edit-customer-footer').append(customerEditBtn);
-            // var connectionAppVal = $('#jobRow' + tdClasses[1] + ' > .jobTd' + tdClasses[1] + ' > .connectionApp').val()
-            // var connectionNumVal = $('#jobRow' + tdClasses[1] + ' > .jobTd' + tdClasses[1] + ' > .connectionNum').val()
-            // var usernameVal = $('#jobRow' + tdClasses[1] + ' > .jobTd' + tdClasses[1] + ' > .username').val()
-            // var passwordVal = $('#jobRow' + tdClasses[1] + ' > .jobTd' + tdClasses[1] + ' > .password').val()
-            // var additionalInfoVal = $('#jobRow' + tdClasses[1] + ' > .jobTd' + tdClasses[1] + ' > .additionalInfo').val()
-
         }else{
             if (confirm('Are you sure you want to DELETE this Customer?')) {
                 deleteCustomer(selectedAction[1]);
@@ -134,30 +106,11 @@ $(document).ready(function() {
     $(document).on('click', '#editCustomer', function(){
         var customerId = $(this).val();
 
-        // var address = $('.accordion-item#' + customerId + ' > .accordion-collapse > .accordion-body > .customer-actions-container > .additionalCustomerInfoTable > tbody > tr > td:nth-child(1)').val();
-        // var city = $('.accordion-item#' + customerId + ' > .accordion-collapse > .accordion-body > .customer-actions-container > .additionalCustomerInfoTable > tbody > tr > td:nth-child(2)').val();
-        // var state = $('.accordion-item#' + customerId + ' > .accordion-collapse > .accordion-body > .customer-actions-container > .additionalCustomerInfoTable > tbody > tr > td:nth-child(3)').val();
-        // var zip = $('.accordion-item#' + customerId + ' > .accordion-collapse > .accordion-body > .customer-actions-container > .additionalCustomerInfoTable > tbody > tr > td:nth-child(4)').val();
-
         var customerTitle = $('#editCustomerName').val();
-        // var city = $('#editCustomerCode').val();
         var city = $('#editCustomerCity').val();
         var address = $('#editCustomerAddress').val();
         var zip = $('#editCustomerZIP').val();
         var state = $('#editCustomerState').val();
-        // var city = $('.additionalCustomerInfoTable > tbody > tr > td:nth-child(2)').val();
-        // var state = $('.additionalCustomerInfoTable > tbody > tr > td:nth-child(3)').val();
-        // var zip = $('.additionalCustomerInfoTable > tbody > tr > td:nth-child(4)').val();
-        // var customerTitle = $('.CustomerTitle').text();
-
-        // var customerTitle = $('.accordion-item#' + customerId + ' > .accordion-header > .accordion-button > .CustomerTitle').text();
-        // var customerCode = $('.accordion-item#61aef87765d495f8d50fa03c > .accordion-header > .accordion-button > .CustomerCode').text();
-
-        // var address = $('.additionalCustomerInfoTable > tbody > tr > td:nth-child(1)').val();
-        // var city = $('.additionalCustomerInfoTable > tbody > tr > td:nth-child(2)').val();
-        // var state = $('.additionalCustomerInfoTable > tbody > tr > td:nth-child(3)').val();
-        // var zip = $('.additionalCustomerInfoTable > tbody > tr > td:nth-child(4)').val();
-        // var customerTitle = $('.CustomerTitle').val();
 
         var newObj = {
             name: customerTitle,
@@ -186,8 +139,6 @@ $(document).ready(function() {
     });
 
     $(document).on('click', '.addCustomerBtn',function () {
-        // $('#myModal').find('.modal-content').html(jobContent);
-        // $('#exampleModal').modal('show');
         $('#creatCustomerModal').modal('show');
     });
 
@@ -210,10 +161,8 @@ $(document).ready(function() {
         }
         $('.modalhardware').modal("hide");
     });
-    // closeHardwareModalBtn
     
     $(document).on('hidden.bs.modal', function () {
-        // do something…
         if($('#addAJob-Modal > .modal-dialog > .modal-content > .modal-body > .formBody > button.submitNewJob')){
             $('#addAJob-Modal > .modal-dialog > .modal-content > .modal-body > .formBody > button.submitNewJob').remove()
         }
@@ -231,14 +180,6 @@ $(document).ready(function() {
         renderHardwareDetails(tdClasses, tdId);
     });
 
-    // ----------DELETE AN ITEM-------------
-    // $(document).on('click', '.deleteACustomer', function (e) {
-    //     var id = $(this).attr('id').split('-')[1];
-    //     if (confirm('Are you sure you want to DELETE this Customer?')) {
-    //         // deleteCustomer(id);
-    //     }
-    // });
-
     $(document).on('click', '.deleteJob', function (e) {
         var parentId = $(this).attr('id').split('-')[1];
         var jobId = $(this).attr('value');
@@ -251,17 +192,9 @@ $(document).ready(function() {
     });
 
     $(document).on('click', '.deleteHardware', function (e) {
-        // associatedUpper
-        // var tdClasses = $(this).attr('class').split(' ');
         var parentId = $(this).attr('id').split('-')[1];
         var hardwareId = $(this).attr('value');
-        //TODO
         deleteAHardware(hardwareId, parentId);
-        // if (confirm('Are you sure you want to DELETE this hardware?')) {
-        //     deleteAJob(jobId, parentId);
-        // } else {
-            
-        // }
     });
 
     $(document).on('click', '.editJob', function (e) {
@@ -283,12 +216,6 @@ $(document).ready(function() {
 
         $('#jobRow' + tdClasses[0] + ' > .jobTd' + tdClasses[0] + ' > input').css('display', 'none');
         $('#jobRow' + tdClasses[0] + ' > .updateJob').css('display', 'none');
-        // ;
-        // $('#jobRow' + tdClasses[1] + ' > .jobTd' + tdClasses[1] + ' > span').css('display', 'block');
-        // $('#jobRow' + tdClasses[1] + ' > .editJob').css('display', 'block');
-
-        // $('#jobRow' + tdClasses[1] + ' > .jobTd' + tdClasses[1] + ' > input').css('display', 'none');
-        // $('#jobRow' + tdClasses[1] + ' > .updateJob').css('display', 'none');
     });
 
     $(document).on('click', '.editHardware', function (e) {
@@ -316,7 +243,6 @@ $(document).ready(function() {
     
     $(document).on('click', '.updateJob', function (e) {
         var tdClasses = $(this).attr('class').split(' ');
-        // $('#jobRow' + tdClasses[1] + ' > .jobTd' + tdClasses[1] + ' > input')
         var connectionAppVal = $('#jobRow' + tdClasses[1] + ' > .jobTd' + tdClasses[1] + ' > .connectionApp').val();
         var connectionNumVal = $('#jobRow' + tdClasses[1] + ' > .jobTd' + tdClasses[1] + ' > .connectionNum').val();
         var usernameVal = $('#jobRow' + tdClasses[1] + ' > .jobTd' + tdClasses[1] + ' > .username').val();
@@ -334,7 +260,6 @@ $(document).ready(function() {
 
     $(document).on('click', '.updateHardware', function (e) {
         var tdClasses = $(this).attr('class').split(' ');
-        // // $('#jobRow' + tdClasses[1] + ' > .jobTd' + tdClasses[1] + ' > input')
         var hardwareName = $('#hardwareRow' + tdClasses[1] + ' > .hardwareTd' + tdClasses[1] + ' > .hardwareName').val();
         var hardwareDescription = $('#hardwareRow' + tdClasses[1] + ' > .hardwareTd' + tdClasses[1] + ' > .hardwareDescription').val();
         var ipAddress = $('#hardwareRow' + tdClasses[1] + ' > .hardwareTd' + tdClasses[1] + ' > .ipAddress').val();
@@ -366,6 +291,9 @@ $(document).ready(function() {
 });
 
 function searchDataBase(value){
+
+    $('.fa-circle-o-notch').removeClass('fadeLoader');
+
     var finishedResults = [];
     $('.accordion-item').css('display', 'none');
     $.ajax({
@@ -374,6 +302,7 @@ function searchDataBase(value){
         url: 'http://localhost:3000/fuzzySearchCustomers', //URL OR ENDPOINT
         data: {"search": value},
         success: function (res){
+            $('.fa-circle-o-notch').addClass('fadeLoader');
             if(res){
                 if(res.results.length > 0) finishedResults = [...res.results];
             }else if(res === 'ERROR!'){
@@ -431,7 +360,7 @@ function fetchCustomers() {
             if(res && res.data !== undefined){
                 var arr = res.data.reverse();
                 
-                $('.fa-circle-o-notch').addClass('fade');
+                $('.fa-circle-o-notch').addClass('fadeLoader');
 
                 arr.forEach(function(data, i){
                     if(!$.cookie('customer' + arr[i]._id + '')){
@@ -567,11 +496,9 @@ function fetchJobs(id){
 function renderHardwareDetails(id, jobId){
     
     var parentId = id[0].split('jobSelect')[0].trim();
-
     if($.cookie('customer' + parentId )){
         var cookieData = JSON.parse($.cookie('customer' + parentId ));
     }
-
     for(var i = 0; i < cookieData.Jobs.length; i++){
         if(cookieData.Jobs[i]._id === jobId){
             var selectedJobDetails = cookieData.Jobs[i];
@@ -605,7 +532,6 @@ function renderHardwareDetails(id, jobId){
         '<div class="modal-footer">' +
             '<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>' +
         '</div>';
-    // htmlData = '<ul><li>title: Name </li><li>age: Age </li></ul>';
     
     $('#myModal').find('.modal-content').html(hardwareContent);
 
@@ -643,24 +569,18 @@ function renderHardwareDetails(id, jobId){
     }else{
         // $('.mainTableForHardware').append(table);
     }
-    // <textarea placeholder=` + data.description + ` value="` + data.description + `"></textarea>
-    
     $('#exampleModal').modal('show');
-    // infoModal.modal('show');
-    // $('#modal-dialog').append(jobContent);
 }
 
 function jobEdit(tdClasses){
-    // deleteJob 61aeecd065d495f8d50fa031
     $('.deleteJob.' + tdClasses[1]).text('Cancel');
     $('.deleteJob.' + tdClasses[1]).addClass('cancelEditingJob');
     $('.' + tdClasses[1] + '.dc').removeClass('deleteJob');
 
     $('#jobRow' + tdClasses[1] + ' > .jobTd' + tdClasses[1] + ' > input').css('display', 'block');
-    $('#jobRow' + tdClasses[1] + ' > .jobTd' + tdClasses[1] + ' > span').css('display', 'none'); //TODO the first td span needs to be written
+    $('#jobRow' + tdClasses[1] + ' > .jobTd' + tdClasses[1] + ' > span').css('display', 'none');
     $('#jobRow' + tdClasses[1] + ' > .editJob').css('display', 'none');
 
-    // $('#jobRow' + tdClasses[1] + ' > .jobTd' + tdClasses[1] + ' > input').css('display', 'block'); //TODO the first td input needs to be written
     $('#jobRow' + tdClasses[1] + ' > .jobTd' + tdClasses[1] + ' > input').css('display', 'block');
     $('#jobRow' + tdClasses[1] + ' > .updateJob').css('display', 'revert');
 }
@@ -669,7 +589,7 @@ function updateEditedJob(jobId, updatedObj){
     $.ajax({
         method: 'PUT',
         dateType: 'json',
-        url: 'http://localhost:3000/updateJob', //URL OR ENDPOINT
+        url: 'http://localhost:3000/updateJob',
         data: {"id": jobId, updatedJob: updatedObj},
         success: function (res){
             if(res){
@@ -694,7 +614,6 @@ function updateEditedJob(jobId, updatedObj){
                 var toast = new bootstrap.Toast(toastLiveExample)
                 toast.show();
             }
-            // var response = JSON.parse(res);
         },
         error: function (jqXHR, textStatus, errorThrown)
         {
@@ -709,7 +628,7 @@ function editCustomer(customerId, updatedObj){
     $.ajax({
         method: 'PUT',
         dateType: 'json',
-        url: 'http://localhost:3000/updateCustomer', //URL OR ENDPOINT
+        url: 'http://localhost:3000/updateCustomer',
         data: {"id": customerId, "updatedObj": updatedObj},
         success: function (res){
             if(res){
@@ -726,7 +645,6 @@ function editCustomer(customerId, updatedObj){
                 var toast = new bootstrap.Toast(toastLiveExample)
                 toast.show();
             }
-            // var response = JSON.parse(res);
         },
         error: function (jqXHR, textStatus, errorThrown)
         {
@@ -735,15 +653,7 @@ function editCustomer(customerId, updatedObj){
         }
     });
 }
-// var newObj = {
-//     name: hardwareName,
-//     description: hardwareDescription,
-//     ipAddress: ipAddress,
-//     subnetMask: subnetMask,
-//     defaultGateway: defaultGateway,
-//     username: hardwareUsername,
-//     password: hardwarePassword
-// }
+
 function updateHardware(hardwareId, updatedHardware){
     $.ajax({
         method: 'PUT',
@@ -785,7 +695,6 @@ function updateHardware(hardwareId, updatedHardware){
 }
 
 function hardwareEdit(tdClasses){
-    // alert('edit this hardware');
     $('.deleteHardware.' + tdClasses[1]).text('Cancel');
     $('.deleteHardware.' + tdClasses[1]).addClass('cancelEditingHardware');
     $('.' + tdClasses[1] + '.dc').removeClass('deleteHardware');
@@ -830,7 +739,6 @@ function addJob(id){
             if(word.value.length === 0 || word.value.length < 4 && word.id === 'addJobJobNumber'){
                 return word.id;
             }
-            // return word.length === 0
         });
         for(var i = 0; i < validate.length; i++){
             $('#' + validate[i].id).addClass('validaitonErrorInput');
@@ -878,8 +786,7 @@ function addJob(id){
                 $('.modal').modal("hide");
                 var toast = new bootstrap.Toast(toastLiveExample);
                 toast.show();
-                // $('#jobTable' + data.parentId).append(jobTableRowHTML);
-                // $("#jobRow" + jobId).remove(); //add new Job to the row from the table's DOM.
+                
                 var jobTableRowHTML = 
                     '<tr id="jobRow' + data.jobId + '" class="' + data.parentId + '">' +
                         '<td class="' + data.parentId + ' jobSelect"><button class="jobSelectBtn btn" data-toggle="tooltip" data-placement="top" title="Select to view hardware">' + data.jobNumber + '</button></td>' +
@@ -892,9 +799,7 @@ function addJob(id){
                         '<td class="editJob ' + data.jobId + ' es" value="' + data.jobId + '">EDIT</td>' +
                         '<td style="display: none;" class="updateJob ' + data.jobId + '">SAVE</td>' +
                     '</tr>'
-                    // $('.accordion-item#' + id + ' > .accordion-collapse > .accordion-body > span').removeClass('bodyEmpty');
                     
-                    // $('#' + $('.accordion-item#' + id + '') + '> .accordion-collapse > .accordion-body > span').addClass('dataFufilled');
                     $('#addJobJobNumber').val('');
                     $('#addJobConnectionNumber').val('');
                     $('#addJobConnectionApplication').val('');
@@ -1159,20 +1064,6 @@ function createCustomer(){
             
             $.cookie('customer' + data._id + '', JSON.stringify(data), {expires: 10});
 
-            // var a = []
-            // $('.accordion-item').each((i, item) => {
-            //     a.push({headerId: $(".accordion-header")[i].id.split('heading')[1]});
-            //     // if(Number($(".accordion-header")[i].id.split('heading')[1]) === a.length + 1){
-            //     //     a.push(i);
-            //     // }
-            // });
-            // var arr = a.length;
-            // for(var i = 0; i < a.length; i++){
-            //     // $(".accordion-header")[i].id.split('heading')[1]
-            //     if(Number(a[i].headerId) === a.length){
-            //         arr = (arr + 1);
-            //     }
-            // };
             //TODO BUILD THIS LOGIC VVVVVVVVV
             // if(data.Jobs.length === 0){
             //     var jobSection = '<h3 id="noJobs">This customer has no jobs</h3>'
@@ -1187,6 +1078,7 @@ function createCustomer(){
             //     '<th></th>' +
             //     '<th></th>';
             // }
+
             var tempHeadingNum = Math.random().toFixed(3).split('.')[1];
             var accordianCustomerHTML = 
                 '<div class="accordion-item" id="' + data._id + '">' +
@@ -1224,7 +1116,6 @@ function createCustomer(){
                                 '<th></th>' +
                                 '<th></th>' +
                             '</table>'+
-                            // '<img class="tableLoader" style="width: 50px;" src="https://acegif.com/wp-content/uploads/loading-36.gif" />'
                         '</div>' +
                     '</div>' +
                 '</div>';
@@ -1237,12 +1128,7 @@ function createCustomer(){
             $('#createCustomerCity').val('');
             $('#createCustomerAddress').val('');
             $('#CreateCustomerZIP').val('');
-            // var customerState = $('#CreateCustomerState').val();
-
             
-            // $('.accordion-item#' + id + '' + '> .accordion-collapse > .accordion-body > span').removeClass('bodyEmpty');
-            // $('.accordion-item#' + id + '' + '> .accordion-collapse > .accordion-body > span').addClass('dataFufilled');
-            // $('.tableLoader').css('display', 'none');
         },
         error: function (jqXHR, textStatus, errorThrown)
         {
@@ -1252,7 +1138,6 @@ function createCustomer(){
 }
 
 function deleteCustomer(id){
-    // console.log('deleting customer: ' + id);
     $.ajax({
         method: 'DELETE',
         dateType: 'json',

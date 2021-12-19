@@ -10,21 +10,16 @@ body{
     font-size: 44px;
     left: 50%;
     color: #179977;
-    
-    /* transition: opacity 10s ease-in-out; */
     opacity: 1;
 }
 
-.fade{
-    /* visibility: hidden; */
+.fadeLoader{
     opacity: 0;
-    -webkit-transition: all 10s ease-in-out;
-    -moz-transition: all 10s ease-in-out;
-    -ms-transition: all 10s ease-in-out;
-    -o-transition: all 10s ease-in-out;
-    transition: all 10s ease-in-out;
-    /* transition: visibility 0s 2s, opacity 2s linear; */
-    
+    -webkit-transition: all 2s ease-in-out;
+    -moz-transition: all 2s ease-in-out;
+    -ms-transition: all 2s ease-in-out;
+    -o-transition: all 2s ease-in-out;
+    transition: all 2s ease-in-out;
     
 }
 
@@ -45,6 +40,8 @@ td{
 }
 
 .modal-body{color:white;}
+
+#addHardware-Modal{background-color: #323542e0}
 
 .accordion-body{
     background-image: url('/img/pattern.png');
@@ -151,17 +148,12 @@ td > input {
 }
 
 .addCustomerBtn{
-    /* background: rgb(255,255,255); */
-    /* background: linear-gradient(180deg, #01d91c 0%, #00a516 100%); */
     padding: 5px !important;
     margin: 15px !important;
     vertical-align: middle;
     border-radius: 0 !important;
-    /* background-color: #01d91c;
-    border: 1px solid #171b60; */
 }
 .addCustomerBtn:hover{
-    /* background: linear-gradient(180deg, #00a516 0%, #01d91c 100%); */
     border: 1px solid #171b60;
     transition: all ease-in-out 0.2s;
     border-radius: 4px !important;
@@ -170,10 +162,6 @@ td > input {
 #noHardware{
     text-align: center;
     padding: 2%;
-}
-
-#addHardware-Modal{
-    background-color: #323542e0 
 }
 
 #CreateCustomerState,#editCustomerState{
@@ -191,22 +179,6 @@ td > input {
 
 .hardwareTbody > tr > td:nth-child(2){
     max-width: 275px
-}
-
-.tooltip .tooltiptext {
-    content: " ";
-    position: absolute;
-    bottom: 100%;  /* At the top of the tooltip */
-    left: 50%;
-    margin-left: -5px;
-    border-width: 5px;
-    border-style: solid;
-    border-color: transparent transparent black transparent;
-}
-
-/* Show the tooltip text when you mouse over the tooltip container */
-.tooltip:hover .tooltiptext {
-    visibility: visible;
 }
 
 #fuzzysearcher{

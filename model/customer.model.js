@@ -29,35 +29,7 @@ var CustomerSchema = new mongoose.Schema({
     },
     jobs: {
         type: Array
-        // required: "Required",
-        // default: [{
-        //     jobNumber: {
-        //         type: String,
-        //         // required: "Required"
-        //     },
-        //     connectionApp: {
-        //         type: String,
-        //         // required: "Required"
-        //     },
-        //     connectionNum: {
-        //         type: String,
-        //         // required: "Required"
-        //     },
-        //     username: {
-        //         type: String,
-        //         // required: "Required"
-        //     },
-        //     password: {
-        //         type: String,
-        //         // required: "Required"
-        //     },
-        //     additionalInfo: {
-        //         type: String,
-        //         // required: "Required"
-        //     },
-        // }]
     }
 }, { versionKey: false }); // versionKey is to refrain mongoose from adding a __v key to the schema, this is a mongoose versioning ability.
 
-// CustomerSchema.plugin(mongoose_fuzzy_searching, { fields: ['name', 'code', 'city', 'state', 'zip', 'address','jobs'] });
 mongoose.model("Customer", CustomerSchema);

@@ -12,7 +12,6 @@ router.post("/fuzzySearchCustomers", function(req, res) {
     var resultsArray = [];
     if (req.body.search) {
        const regex = new RegExp(escapeRegex(req.body.search), 'gi');
-    //    console.log(regex);
         CustomerModel.find({ $text: { $search: regex} }, function(err, returnedResults) {
             if(err) {
                 console.log(err);
@@ -31,8 +30,6 @@ router.post("/createCustomer", (req, res) => {
 });
 
 router.put("/updateCustomer", (req, res) => {
-    // console.log(req.body.updatedObj);
-    // console.log(req.body.id);
     CustomerModel.updateOne({_id: req.body.id}, {$set: req.body.updatedObj}, (err, docs) => {
         if(!err){
             console.log('Customer : ' + req.body.id + ' is updated');

@@ -1,12 +1,8 @@
 const mongoose = require("mongoose");
 
-// const options = {
-//     useNewUrlParser: true,
-//     useUnifiedTopology: true,
-//     useFindAndModify: false,
-//     useCreateIndex: true,
-// };
 mongoose.Promise = global.Promise;
+
+//Commonly inserted into env. Leaving this temporarily
 mongoose.connect("mongodb+srv://mbuser:mbarreiro@cluster0.hong0.mongodb.net/customerConnectionDb?retryWrites=true&w=majority", (error) => {
     if(!error){
         console.log('Success!');

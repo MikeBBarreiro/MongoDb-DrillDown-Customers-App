@@ -1,34 +1,15 @@
 const express = require("express");
 const mongoose = require("mongoose");
-
-
 const router = express.Router();
+
 const JobModel = mongoose.model("Job");// this is the Customer model created in the model/customer.model.js
-
 const CustomerController = require("./customers");
-
 var ObjectId = require('mongodb').ObjectId; //Access to new ObjectId to create Id's from here for DB.
 
-// router.get("/add", (req, res) => {
-//     res.render('add job');
-// });
-
-// router.post("/add", (req, res) => {
-//     res.render('add job');
-//     console.log(req.body);
-//     // var job = new CustomerModel();
-//     // job.jobs = req.body
-
-// });
-
 router.post("/fuzzySearchJobs", function(req, res) {
-    console.log(req.body);
     var resultsArray = [];
     if (req.body.search) {
        const regex = new RegExp(escapeRegex(req.body.search), 'gi');
-       console.log(regex);
-        //    {"$text":{"$search":"Java MongoDB"}}
-        // { "name": regex }
         JobModel.find({ $text: { $search: regex} }, function(err, returnedResults) {
             if(err) {
                 console.log(err);
@@ -41,20 +22,10 @@ router.post("/fuzzySearchJobs", function(req, res) {
 });
 
 // url/course/list
-
 //Each job is fetched one at a time based off wich customer is selected to review.
 router.post("/getJobByID/", (req, res) => {
-    // console.log(req.body);
     JobModel.find({parentId: req.body.id}, (err, docs) => {
         if(!err){
-            
-            // res.setHeader('Content-Type', 'application/json');
-            // console.log(docs);
-            // console.log(req.body);
-            // const jobs =  docs.jobs;
-            // console.log(docs[0].jobs); //docs lives inside a collection, docs is another way of saying json data
-            // console.log(docs);
-            // res.send(JSON.stringify( {data: docs} ));
             res.send(JSON.stringify({data: docs}));
         }else{
             res.send("ERROR!");
@@ -68,16 +39,12 @@ router.post("/addAJob", (req, res) => {
     var objId;
     var data = req.body.obj
     //A Mongoose model does not have a insertOne method. Use the create method instead:
-    // {parentId: req.body.obj.parentId}, 
     JobModel.create({jobNumber: data.jobNumber,connectionApp: data.connectionApp,connectionNum: data.connectionNum,username: data.username,password: data.password,additionalInfo: data.additionalInfo,parentId: data.parentId}, 
         (err, docs) => {
-            // console.log(docs);
             if(!err){
                 CustomerController.updateCustomerJobsArray(docs.parentId, docs._id, data.jobNumber, false, res);
                 data.jobId = docs._id;
-                // console.log(data);
                 res.send(JSON.stringify(data));
-                // res.send();
             }else{
                 res.send("ERROR!");
             }
@@ -86,18 +53,8 @@ router.post("/addAJob", (req, res) => {
 });
 
 router.put("/updateJob/", (req, res) => {
-    // console.log(req.body);
-    // console.log(req.body.updatedJob)
     JobModel.updateOne({_id: req.body.id}, {$set: req.body.updatedJob}, (err, docs) => {
         if(!err){
-            
-            // res.setHeader('Content-Type', 'application/json');
-            // console.log(docs);
-            // console.log(req.body);
-            // const jobs =  docs.jobs;
-            // console.log(docs[0].jobs); //docs lives inside a collection, docs is another way of saying json data
-            // console.log(docs);
-            // res.send(JSON.stringify( {data: docs} ));
             res.send(JSON.stringify({data: docs, updatedData: req.body.updatedJob}));
         }else{
             console.log(err);
@@ -147,10 +104,7 @@ router.post("/addHardware", (req, res) => {
     });
 });
 
-
 router.put("/updateHardware", (req, res) => {
-    // console.log(req.body);
-    // console.log(req.body.updatedJob)
     JobModel.updateOne({_id: req.body.id}, {$set: req.body.updatedHardware}, (err, docs) => {
         if(!err){
             res.send(JSON.stringify({data: docs, updatedData: req.body.updatedHardware}));
@@ -168,7 +122,6 @@ function escapeRegex(text) {
 
 module.exports = {
     router: router
-    // removeJobs: removeJobs //this function has been ommitted, keeping to later investigate loginc performence.
 }
 // module.exports.removeJobs = removeJobs;
 //TODO OPTIMISE 2 controllers exporting each other has casued an issue with heper function read, look into this to optimise.
