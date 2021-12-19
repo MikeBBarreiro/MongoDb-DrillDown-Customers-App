@@ -1,0 +1,251 @@
+body{
+    background-color: cornflowerblue;
+    background: linear-gradient(180deg, #ffffff 0%, #a5a5a5 100%) !important;
+    height: 100vh;
+}
+
+.fa-circle-o-notch{
+    position: absolute;
+    top: 2%;
+    font-size: 44px;
+    left: 50%;
+    color: #179977;
+    
+    /* transition: opacity 10s ease-in-out; */
+    opacity: 1;
+}
+
+.fade{
+    /* visibility: hidden; */
+    opacity: 0;
+    -webkit-transition: all 10s ease-in-out;
+    -moz-transition: all 10s ease-in-out;
+    -ms-transition: all 10s ease-in-out;
+    -o-transition: all 10s ease-in-out;
+    transition: all 10s ease-in-out;
+    /* transition: visibility 0s 2s, opacity 2s linear; */
+    
+    
+}
+
+/* #header{
+    display: flex;
+} */
+
+td{
+    border: 1px solid black !important;
+    max-width: 155px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.modal-content{
+    background: linear-gradient(180deg, #4e5b68 0%, #323542 100%) !important;
+}
+
+.modal-body{color:white;}
+
+.accordion-body{
+    background-image: url('/img/pattern.png');
+}
+
+.jobSelectBtn{
+    background: rgb(255,255,255);
+    background: linear-gradient(180deg, #198754 0%, #00a516 100%);
+    border: 1px solid darkslategrey;
+    background-color: #198754;
+    width: 100%;
+    padding: 0 !important;
+}
+
+.jobSelectBtn:hover{
+    cursor: pointer;
+    background: linear-gradient(180deg, #1fa868 0%, #01c51b 100%);
+}
+
+.jobSelect:hover{cursor: pointer;}
+.deleteHardware:hover{cursor: pointer;}
+.dc:hover{cursor: pointer;}
+.es:hover{cursor: pointer;}
+.updateHardware:hover{cursor: pointer;}
+
+table{
+    font-weight: 200;
+}
+table > tbody > tr > td {vertical-align: middle;}
+
+.CustomerCode{
+    color: white !important;
+    padding: 15px 8px 15px 8px; 
+    background-color: #169977;
+    min-width: 114px;
+}
+.CustomerTitle{
+    color: #353E48 !important;
+    font-weight: 800;
+    margin-left: 10px;
+}
+
+.mainTableForCustomer > tbody > tr > td:nth-child(1){
+    text-align: center;
+    vertical-align: middle;
+}
+.mainTableForCustomer > tbody > tr > th {
+    text-align: center;
+}
+
+.mainTableForJob > tbody > tr > td:nth-child(1){
+    text-align: center;
+    vertical-align: middle;
+}
+.mainTableForJob > tbody > tr > th{
+    text-align: center;
+}
+.mainTableForJob > tbody > tr > td > input{
+    width: 100%;
+}
+
+.mainTableForHardware  > tbody > tr > td:nth-child(1){
+    text-align: center;
+    vertical-align: middle;
+}
+.mainTableForHardware > tbody > tr > th{
+    text-align: center;
+}
+.mainTableForHardware > tbody > tr > td > input{
+    width: 100%;
+}
+
+td > input {
+    width: 100%;
+}
+
+.tableLoader{
+    position: absolute;
+    left: 50%;
+    top: 40%;
+}
+
+.customer-actions-container{
+    /* margin: 0 10px 10px; */
+    background-color: #0000007a;
+    padding: 5px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.customer-actions-container > button {
+    margin:  0 10px;
+}
+
+.additionalCustomerInfoTable{
+    margin-bottom: 14px;
+    display: inline;
+    vertical-align: middle;
+}
+
+.additionalCustomerInfoTable > tbody > tr > td{
+    border: transparent !important;
+    font-weight: 300;
+}
+
+.addCustomerBtn{
+    /* background: rgb(255,255,255); */
+    /* background: linear-gradient(180deg, #01d91c 0%, #00a516 100%); */
+    padding: 5px !important;
+    margin: 15px !important;
+    vertical-align: middle;
+    border-radius: 0 !important;
+    /* background-color: #01d91c;
+    border: 1px solid #171b60; */
+}
+.addCustomerBtn:hover{
+    /* background: linear-gradient(180deg, #00a516 0%, #01d91c 100%); */
+    border: 1px solid #171b60;
+    transition: all ease-in-out 0.2s;
+    border-radius: 4px !important;
+}
+
+#noHardware{
+    text-align: center;
+    padding: 2%;
+}
+
+#addHardware-Modal{
+    background-color: #323542e0 
+}
+
+#CreateCustomerState,#editCustomerState{
+    margin: auto;
+    display: block;
+    width: 100%;
+    padding: 8px;
+    border-radius: 5px;
+}
+
+#editCustomerCode:disabled{
+    color: #939393;
+    background-color: #626262;
+}
+
+.hardwareTbody > tr > td:nth-child(2){
+    max-width: 275px
+}
+
+.tooltip .tooltiptext {
+    content: " ";
+    position: absolute;
+    bottom: 100%;  /* At the top of the tooltip */
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent black transparent;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+}
+
+#fuzzysearcher{
+    position: absolute;
+    right: 4%;
+    top: 2%;
+}
+
+#submitFuzzySearch{
+    border:0;
+    background-color: #198754;
+    color: black;
+}
+
+#submitFuzzySearch:hover{
+    /* background-color: #23b571; */
+    color: white;
+    transition: all ease-in-out 0.2s;
+}
+
+#returnInitDom:hover{
+    color:white;
+    transition: all ease-in-out 0.2s;
+}
+
+#returnInitDom{
+    border: 0;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    background-color: #0e6efd;
+    padding: 0 10px;
+}
+
+#needCustomers{
+    text-align: center; margin-top: 8%; color: #b9b9b9; animation-iteration-count: 3;
+}
+
+.validaitonErrorInput{
+    border: 1px solid red !important;
+    box-shadow: 0 0 15px red !important;
+    transition: all ease-in-out 0.5s;
+}

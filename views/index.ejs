@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Allpax</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link rel="stylesheet" href="/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/bootstrap/bootstrap.min.css">
+</head>
+  <body>
+    <div id="header">
+      <h1 style="padding: 5px 15px 5px 15px; display: inline-block;background-color: #169977; border-bottom: 5px solid black;">Customers</h1>
+      <button class="addCustomerBtn btn btn-primary">Add New Customer</button>
+      <i class="fa fa-spin fa-circle-o-notch animate__animated" aria-hidden="true"></i>
+      <div id="fuzzysearcher">
+        <!-- <div class="input-group">
+          <input type="text" class="form-control" aria-label="Fuzzy Search">
+          <div class="input-group-append">
+            <span id="submitFuzzySearch" class="input-group-text">Search</span>
+            <span id="returnInitDom" class="input-group-text"><i class="fa fa-refresh" aria-hidden="true"></i></span>
+          </div>
+        </div> -->
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" aria-label="search" aria-describedby="basic-addon2">
+          <button id="submitFuzzySearch">Search</button>
+          <button id="returnInitDom">
+            <i class="fa fa-refresh" aria-hidden="true"></i>
+            <!-- https://fontawesome.com/v4.7/icons/ -->
+          </button>
+        </div>
+        
+        <!-- <label>Search</label>
+        <input placeholder="Search"></input>
+        <button id="submitFuzzySearch">Search</button>
+        <button id="returnInitDom">
+          <i class="fa fa-refresh" aria-hidden="true"></i>
+          https://fontawesome.com/v4.7/icons/
+        </button> -->
+      </div>
+    </div>
+      
+    <div id="CustomersContainer">
+        <div class="accordion" id="accordionParent">
+
+        </div>
+    </div>
+  
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div id="myModal" class="modal-dialog modal-xl">
+            <div class="modal-content">
+                
+            </div>
+        </div>
+    </div>
+    <!-- Customer Creation Modal -->
+    <div id="creatCustomerModal" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="creatCustomerModalLabel">Add new customer</h5>
+              <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button> -->
+            </div>
+            <div class="modal-body">
+              <div class="formBody" style="margin: 15px;">
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-md-4">
+                      <label for="createCustomerName">Name</label>
+                    <input type="text" class="form-control" id="createCustomerName" placeholder="Enter Customers name" name="Customer_Name">
+                    </div>
+                    <div class="col-md-4">
+                      <label for="createCustomerCode">Customer Code Number</label>
+                      <input type="text" class="form-control" id="createCustomerCode" max="4" placeholder="Enter Code Number" name="Customer_Code">
+                    </div>
+                    <div class="col-md-4">
+                      <label for="createCustomerCity">City</label>
+                      <input type="text" class="form-control" id="createCustomerCity" placeholder="Enter City" name="Customer_City">
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-4">
+                      <label for="createCustomerAddress">Address</label>
+                  <input type="test" class="form-control" id="createCustomerAddress" name="Customer_Address" placeholder="Enter Customers Address">
+                    </div>
+                    <div class="col-md-4">
+                      <label for="CreateCustomerZIP">ZIP</label>
+                      <input type="number" class="form-control" id="CreateCustomerZIP" max="4" name="Customer_ZIP" placeholder="Enter Customer ZIP">
+                    </div>
+                    <div class="col-md-4">
+                      <label for="CreateCustomerState">State</label>
+                      <select name="state" id="CreateCustomerState">
+                        <option value="AL">Alabama</option><option value="AK">Alaska</option>
+                        <option value="AZ">Arizona</option><option value="AR">Arkansas</option>
+                        <option value="CA">California</option><option value="CO">Colorado</option>
+                        <option value="CT">Connecticut</option><option value="DE">Delaware</option>
+                        <option value="FL">Florida</option><option value="GA">Georgia</option>
+                        <option value="HI">Hawaii</option><option value="ID">Idaho</option>
+                        <option value="IL">Illinois</option><option value="IN">Indiana</option>
+                        <option value="IA">Iowa</option><option value="KS">Kansas</option>
+                        <option value="KY">Kentucky</option><option value="LA">Louisiana</option>
+                        <option value="ME">Maine</option><option value="MD">Maryland</option>
+                        <option value="MA">Massachusetts</option><option value="MI">Michigan</option>
+                        <option value="MN">Minnesota</option><option value="MS">Mississippi</option>
+                        <option value="MO">Missouri</option><option value="MT">Montana</option>
+                        <option value="NE">Nebraska</option><option value="NV">Nevada</option>
+                        <option value="NH">New Hampshire</option><option value="NJ">New Jersey</option>
+                        <option value="NM">New Mexico</option><option value="NY">New York</option>
+                        <option value="NC">North Carolina</option><option value="ND">North Dakota</option>
+                        <option value="OH">Ohio</option><option value="OK">Oklahoma</option>
+                        <option value="OR">Oregon</option><option value="PA">Pennsylvania</option>
+                        <option value="RI">Rhode Island</option><option value="SC">South Carolina</option>
+                        <option value="SD">South Dakota</option><option value="TN">Tennessee</option>
+                        <option value="TX">Texas</option><option value="UT">Utah</option>
+                        <option value="VT">Vermont</option><option value="VA">Virginia</option>
+                        <option value="WA">Washington</option><option value="WV">West Virginia</option>
+                        <option value="WI">Wisconsin</option><option value="WY">Wyoming</option>
+                      </select>
+                    </div>
+                  </div> 
+                  
+                </div>
+                  <!-- <button id="submitNewJob" style="margin: 10px;" type="submit" class="btn btn-primary">Submit</button> -->
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary closeModalBtn" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary" id="createCustomer">Create Customer</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Customer Editing Modal -->
+    <div id="editCustomerModal" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="editCustomerModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="editCustomerModalLabel">Customer Editor</h5>
+              <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button> -->
+            </div>
+            <div class="modal-body">
+              <div class="EditCustomerformBody" style="margin: 15px;">
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-md-4">
+                      <label for="editCustomerName">Name</label>
+                    <input type="text" class="form-control" id="editCustomerName" placeholder="Enter Customers name" name="Customer_Name">
+                    </div>
+                    <div class="col-md-4">
+                      <label for="editCustomerCode">Customer Code Number</label>
+                      <input type="text" disabled class="form-control" id="editCustomerCode" placeholder="Enter Code Number" name="Customer_Code">
+                    </div>
+                    <div class="col-md-4">
+                      <label for="editCustomerCity">City</label>
+                      <input type="text" class="form-control" id="editCustomerCity" placeholder="Enter City" name="Customer_City">
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-4">
+                      <label for="editCustomerAddress">Address</label>
+                  <input type="text" class="form-control" id="editCustomerAddress" name="Customer_Address" placeholder="Enter Customers Address">
+                    </div>
+                    <div class="col-md-4">
+                      <label for="editCustomerZIP">ZIP</label>
+                      <input type="number" class="form-control" id="editCustomerZIP" max="4" name="Customer_ZIP" placeholder="Enter Customer ZIP">
+                    </div>
+                    <div class="col-md-4">
+                      <label for="editCustomerState">State</label>
+                      <select name="state" id="editCustomerState">
+                        <option value="AL">Alabama</option><option value="AK">Alaska</option>
+                        <option value="AZ">Arizona</option><option value="AR">Arkansas</option>
+                        <option value="CA">California</option><option value="CO">Colorado</option>
+                        <option value="CT">Connecticut</option><option value="DE">Delaware</option>
+                        <option value="FL">Florida</option><option value="GA">Georgia</option>
+                        <option value="HI">Hawaii</option><option value="ID">Idaho</option>
+                        <option value="IL">Illinois</option><option value="IN">Indiana</option>
+                        <option value="IA">Iowa</option><option value="KS">Kansas</option>
+                        <option value="KY">Kentucky</option><option value="LA">Louisiana</option>
+                        <option value="ME">Maine</option><option value="MD">Maryland</option>
+                        <option value="MA">Massachusetts</option><option value="MI">Michigan</option>
+                        <option value="MN">Minnesota</option><option value="MS">Mississippi</option>
+                        <option value="MO">Missouri</option><option value="MT">Montana</option>
+                        <option value="NE">Nebraska</option><option value="NV">Nevada</option>
+                        <option value="NH">New Hampshire</option><option value="NJ">New Jersey</option>
+                        <option value="NM">New Mexico</option><option value="NY">New York</option>
+                        <option value="NC">North Carolina</option><option value="ND">North Dakota</option>
+                        <option value="OH">Ohio</option><option value="OK">Oklahoma</option>
+                        <option value="OR">Oregon</option><option value="PA">Pennsylvania</option>
+                        <option value="RI">Rhode Island</option><option value="SC">South Carolina</option>
+                        <option value="SD">South Dakota</option><option value="TN">Tennessee</option>
+                        <option value="TX">Texas</option><option value="UT">Utah</option>
+                        <option value="VT">Vermont</option><option value="VA">Virginia</option>
+                        <option value="WA">Washington</option><option value="WV">West Virginia</option>
+                        <option value="WI">Wisconsin</option><option value="WY">Wyoming</option>
+                      </select>
+                    </div>
+                  </div> 
+                  
+                </div>
+                  <!-- <button id="submitNewJob" style="margin: 10px;" type="submit" class="btn btn-primary">Submit</button> -->
+              </div>
+            </div>
+            <div class="modal-footer edit-customer-footer">
+              <button type="button" class="btn btn-secondary closeModalBtn" data-dismiss="modal">Close</button>
+              <!-- <button type="button" class="btn btn-primary" id="editCustomer" valye="">Edit Customer</button> -->
+            </div>
+          </div>
+      </div>
+    </div>
+    <!--  -->
+    <div id="addAJob-Modal" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="addAJob-ModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="addAJob-ModalLabel">Add Job</h5>
+          </div>
+          <div class="modal-body">
+            <!-- action="/addAJob" method="POST" -->
+            <div class="formBody" style="margin: 15px;">
+                <div class="form-group">
+                    <label for="addJobJobNumber">Job Number</label>
+                    <input type="text" class="form-control" id="addJobJobNumber" aria-describedby="emailHelp" placeholder="Enter the Job Number" name="Job_Number">
+                
+                    <label for="addJobConnectionNumber">Connection Number</label>
+                    <input type="text" class="form-control" id="addJobConnectionNumber" aria-describedby="emailHelp" placeholder="Enter Connection Number" name="Connection_Number">
+                
+                    <label for="addJobConnectionApplication">Connection Application</label>
+                    <input type="email" class="form-control" id="addJobConnectionApplication" aria-describedby="emailHelp" name="Connection_Application" placeholder="Enter Connection Application">
+
+                    <label for="addJobUsername">Username</label>
+                    <input type="email" class="form-control" id="addJobUsername" aria-describedby="emailHelp" name="username" placeholder="Enter User name">
+
+                    <label for="addJobPassword">Password</label>
+                    <input type="email" class="form-control" id="addJobPassword" aria-describedby="emailHelp" name="password" placeholder="Enter Password">
+
+                    <label for="addJobAdditionalInformation">Additional Information</label>
+                    <textarea type="textarea" class="form-control" id="addJobAdditionalInformation" aria-describedby="emailHelp" name="additional_information" placeholder="Enter Additional Information here"></textarea>
+                </div>
+                  <!-- <button id="submitNewJob" style="margin: 10px;" type="submit" class="btn btn-primary">Submit</button> -->
+            </div>
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-secondary closeModalBtn" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Add Hardware Modal -->
+    <div id="addHardware-Modal" class="modal fade bd-example-modal-lg modalhardware" tabindex="-1" role="dialog" aria-labelledby="addHardware-ModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content" style="box-shadow: 0 0 100px black;">
+          <div class="modal-header">
+              <h5 class="modal-title" id="addHardware-ModalLabel">Add Hardware</h5>
+              <button type="button" class="btn btn-secondary closeHardwareModalBtn" data-dismiss="modalhardware">Close</button>
+          </div>
+          <div class="modal-body">
+            <!-- action="/addAJob" method="POST" -->
+              <div class="formBody" style="margin: 15px;">
+                  <div class="form-group">
+                      <label for="addHardwareName">Hardware Name</label>
+                      <input type="text" class="form-control" id="addHardwareName" placeholder="Enter the Hardware Name" name="hardware_name">
+                  
+                      <label for="addHardwareIPAddress">IP Address</label>
+                      <input class="form-control" id="addHardwareIPAddress" placeholder="Enter IP Address xxx.xxx.xxx.xxx" name="Hardware_IP_Address" type="text" minlength="7" maxlength="15" size="15" pattern="^((\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.){3}(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$">
+                  
+                      <label for="addHardwareSubnetMask">Subnet Mask</label>
+                      <input type="text" class="form-control" id="addHardwareSubnetMask" name="Subnet_Mask" placeholder="Enter Subnet Mask" minlength="7" maxlength="15" size="15" pattern="^((\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.){3}(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$">
+
+                      <label for="addHardwareDefaultGateway">Default Gateway</label>
+                      <input type="text" class="form-control" id="addHardwareDefaultGateway" name="Default_Gateway" placeholder="Enter Default Gateway" minlength="7" maxlength="15" size="15" pattern="^((\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.){3}(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$">
+
+                      <label for="addHardwareUsername">Username</label>
+                      <input type="text" class="form-control" id="addHardwareUsername" name="username" placeholder="Enter User name">
+
+                      <label for="addHardwarePassword">Password</label>
+                      <input type="text" class="form-control" id="addHardwarePassword" name="password" placeholder="Enter Password">
+
+                      <label for="addHardwareDescription">Hardware Description</label>
+                      <textarea type="textarea" class="form-control" id="addHardwareDescription" name="additional_information" placeholder="Enter Hardwares Description"></textarea>
+                  </div>
+                  <!-- <button id="submitNewJob" style="margin: 10px;" type="submit" class="btn btn-primary">Submit</button> -->
+                </div>
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-secondary closeModalBtn" data-dismiss="modal">Close ALL</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Toast -->
+    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+        <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+          <div class="toast-header">
+            <!-- <img src="..." class="rounded me-2" alt="..."> -->
+            <strong class="me-auto">Great news!</strong>
+            <!-- <small>11 mins ago</small> -->
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+          </div>
+          <div class="toast-body" style="background-color:#28ab5dba;">
+            Action is Sucessful!
+          </div>
+        </div>
+    </div>
+    <!-- ERROR Toast -->
+    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+      <div id="liveToastERROR" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+          <!-- <img src="..." class="rounded me-2" alt="..."> -->
+          <strong class="me-auto">Somthing went wrong</strong>
+          <!-- <small>11 mins ago</small> -->
+          <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body" style="background-color:#ab3c28ba;">
+          There was a problem, unsuccsesful Action.
+        </div>
+      </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="/js/jquery.js" ></script>
+    <script type="text/javascript" src="/js/jquery.cookie.js" ></script>
+    <script type="text/javascript" src="/js/main.js" ></script>
+  </body>
+<!-- {{!-- <script type="text/javascript" src="/js/bootstrap/bootstrap.min.js" /> --}} -->
+</html>
