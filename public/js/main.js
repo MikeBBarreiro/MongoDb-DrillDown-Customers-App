@@ -1,4 +1,12 @@
 $(document).ready(function() {
+
+    // ********************************************************************************
+    //      Author      :   Michael Barreiro
+    //      DateTime    :   12-17-21
+    //      Purpose     :   All .on Click events and event Handlers to watch ON CLICK. Click is done this 
+    //                      way because alot of data is not set on the DOM on load, its all dynamically rendered.
+    // ********************************************************************************
+
     $('#fuzzysearcher > .input-group > input').on('keyup', function (e) {
         if (e.key === 'Enter' || e.keyCode === 13) {
             var value = $('#fuzzysearcher > .input-group > input').val();
@@ -8,7 +16,6 @@ $(document).ready(function() {
     });
 
     fetchCustomers();
-    // fetchJobs($("#accordionParent > .accordion-item:nth-child(1)").attr('id')); //Grab the first loaded Customer
 
     $('[data-toggle="tooltip"]').tooltip()
     
@@ -290,6 +297,11 @@ $(document).ready(function() {
     });
 });
 
+// ********************************************************************************
+//      Author      :   Michael Barreiro
+//      DateTime    :   12-17-21
+//      Purpose     :   Perform a fuzzy search, and from this search only show the items returned from data base.
+// ********************************************************************************
 function searchDataBase(value){
 
     $('.fa-circle-o-notch').removeClass('fadeLoader');
@@ -331,6 +343,7 @@ function searchDataBase(value){
                 console.log('error')
             }
         }).done(() => {
+            // loop through each accordion, match the set Customer Id to the returned results, if matched. Unhide.
             $('.accordion-item').each((index, item) => {
                 for(var i = 0; i < finishedResults.length; i++){
                     if(finishedResults[i].code){
@@ -348,6 +361,12 @@ function searchDataBase(value){
         });
     });
 }
+
+// ********************************************************************************
+//      Author      :   Michael Barreiro
+//      DateTime    :   12-2-21
+//      Purpose     :   Fetch all customers and render the UI for each customer to be displayed.
+// ********************************************************************************
 
 function fetchCustomers() {
     if($('#needCustomers')) $('#needCustomers').remove();
@@ -428,6 +447,12 @@ function fetchCustomers() {
     });
 }
 
+// ********************************************************************************
+//      Author      :   Michael Barreiro
+//      DateTime    :   12-2-21
+//      Purpose     :   Fetch job by ID and render the UI for the job(s) to be displayed. This only gets called on select of a customer
+// ********************************************************************************
+
 function fetchJobs(id){
     if($('.accordion-item#' + id + ' > .accordion-collapse > .accordion-body > span')[0].className === 'bodyEmpty'){
         $.ajax({
@@ -492,6 +517,12 @@ function fetchJobs(id){
         return;
     }
 }
+
+// ********************************************************************************
+//      Author      :   Michael Barreiro
+//      DateTime    :   12-2-21
+//      Purpose     :   On click of a Job, render the Modal to be displayed. This function uses set cookies on first load to load all data.
+// ********************************************************************************
 
 function renderHardwareDetails(id, jobId){
     
@@ -566,11 +597,16 @@ function renderHardwareDetails(id, jobId){
                 $('.hardwareTbody').append(table);
             });
         }
-    }else{
-        // $('.mainTableForHardware').append(table);
     }
+    
     $('#exampleModal').modal('show');
 }
+
+// ********************************************************************************
+//      Author      :   Michael Barreiro
+//      DateTime    :   12-2-21
+//      Purpose     :   When Edit is selected for a job, hide all span texts and show the input fields in their place.
+// ********************************************************************************
 
 function jobEdit(tdClasses){
     $('.deleteJob.' + tdClasses[1]).text('Cancel');
@@ -586,6 +622,12 @@ function jobEdit(tdClasses){
     $('#jobRow' + tdClasses[1] + ' > .jobTd' + tdClasses[1] + ' > textarea').val($('#jobRow' + tdClasses[1] + ' > .jobTd' + tdClasses[1] + ':nth-child(6) > span').text());
     $('#jobRow' + tdClasses[1] + ' > .updateJob').css('display', 'revert');
 }
+
+// ********************************************************************************
+//      Author      :   Michael Barreiro
+//      DateTime    :   12-2-21
+//      Purpose     :   This submits the edited Job data to the database. On successful respnose, the updated data is set on the UI.
+// ********************************************************************************
 
 function updateEditedJob(jobId, updatedObj){
     $.ajax({
@@ -625,6 +667,13 @@ function updateEditedJob(jobId, updatedObj){
     });
 }
 
+// ********************************************************************************
+//      Author      :   Michael Barreiro
+//      DateTime    :   12-2-21
+//      Purpose     :   Sumbits an edited customers data to be set in the database. On successful response, 
+//                      render the new data on the UI
+// ********************************************************************************
+
 function editCustomer(customerId, updatedObj){
     console.log(customerId);
     console.log(updatedObj);
@@ -656,6 +705,36 @@ function editCustomer(customerId, updatedObj){
         }
     });
 }
+
+
+// ********************************************************************************
+//      Author      :   Michael Barreiro
+//      DateTime    :   12-3-21
+//      Purpose     :   When Edit is selected for hardware, hide all span texts and show the input fields in their place.
+// ********************************************************************************
+
+function hardwareEdit(tdClasses){
+    $('.deleteHardware.' + tdClasses[1]).text('Cancel');
+    $('.deleteHardware.' + tdClasses[1]).addClass('cancelEditingHardware');
+    $('.' + tdClasses[1] + '.dc').removeClass('deleteHardware');
+
+    $('#hardwareRow' + tdClasses[1] + ' > .hardwareTd' + tdClasses[1] + ' > span').css('display', 'none');
+    $('.hardwareSelect#' + tdClasses[1] + ' > span').css('display', 'none'); //for first TD
+    $('#hardwareRow' + tdClasses[1] + ' > .editHardware').css('display', 'none');
+
+    $('.hardwareSelect#' + tdClasses[1] + ' > input').css('display', 'block'); //for first TD
+    $('#hardwareRow' + tdClasses[1] + ' > .hardwareTd' + tdClasses[1] + ' > input').css('display', 'block');
+    $('#hardwareRow' + tdClasses[1] + ' > .hardwareTd' + tdClasses[1] + ' > textarea').css('display', 'block');
+    $('#hardwareRow' + tdClasses[1] + ' > .hardwareTd' + tdClasses[1] + ' > textarea').val($('#hardwareRow' + tdClasses[1] + ' > .hardwareTd' + tdClasses[1] + ':nth-child(2) > span').text());
+    $('#hardwareRow' + tdClasses[1] + ' > .updateHardware').css('display', 'revert');
+}
+
+// ********************************************************************************
+//      Author      :   Michael Barreiro
+//      DateTime    :   12-2-21
+//      Purpose     :   Sumbits an edited Hardwares data to be set in the database. On successful response, 
+//                      the new data is rendered on the UI
+// ********************************************************************************
 
 function updateHardware(hardwareId, updatedHardware, parentId){
     console.log(updatedHardware);
@@ -699,21 +778,12 @@ function updateHardware(hardwareId, updatedHardware, parentId){
     });
 }
 
-function hardwareEdit(tdClasses){
-    $('.deleteHardware.' + tdClasses[1]).text('Cancel');
-    $('.deleteHardware.' + tdClasses[1]).addClass('cancelEditingHardware');
-    $('.' + tdClasses[1] + '.dc').removeClass('deleteHardware');
-
-    $('#hardwareRow' + tdClasses[1] + ' > .hardwareTd' + tdClasses[1] + ' > span').css('display', 'none');
-    $('.hardwareSelect#' + tdClasses[1] + ' > span').css('display', 'none'); //for first TD
-    $('#hardwareRow' + tdClasses[1] + ' > .editHardware').css('display', 'none');
-
-    $('.hardwareSelect#' + tdClasses[1] + ' > input').css('display', 'block'); //for first TD
-    $('#hardwareRow' + tdClasses[1] + ' > .hardwareTd' + tdClasses[1] + ' > input').css('display', 'block');
-    $('#hardwareRow' + tdClasses[1] + ' > .hardwareTd' + tdClasses[1] + ' > textarea').css('display', 'block');
-    $('#hardwareRow' + tdClasses[1] + ' > .hardwareTd' + tdClasses[1] + ' > textarea').val($('#hardwareRow' + tdClasses[1] + ' > .hardwareTd' + tdClasses[1] + ':nth-child(2) > span').text());
-    $('#hardwareRow' + tdClasses[1] + ' > .updateHardware').css('display', 'revert');
-}
+// ********************************************************************************
+//      Author      :   Michael Barreiro
+//      DateTime    :   12-3-21
+//      Purpose     :   Adds a new Jobs to the datbase, this first will perform validations before continuing. Then it will render the UI 
+//                      with the new Job.
+// ********************************************************************************
 
 function addJob(id){
 
@@ -829,6 +899,12 @@ function addJob(id){
     });
 }
 
+// ********************************************************************************
+//      Author      :   Michael Barreiro
+//      DateTime    :   12-3-21
+//      Purpose     :   This deletes ajob from the database by ID.
+// ********************************************************************************
+
 function deleteAJob(jobId, parentId){
     $.ajax({
         method: 'DELETE',
@@ -856,6 +932,12 @@ function deleteAJob(jobId, parentId){
         }
     });
 }
+
+// ********************************************************************************
+//      Author      :   Michael Barreiro
+//      DateTime    :   12-15-21
+//      Purpose     :   This creates hardware and then renders on the UI. After passing validation first
+// ********************************************************************************
 
 function createHardware(jobId, customerId){
     var NameValue = $('#addHardwareName').val();
@@ -991,6 +1073,12 @@ function createHardware(jobId, customerId){
     });
 }
 
+// ********************************************************************************
+//      Author      :   Michael Barreiro
+//      DateTime    :   12-15-21
+//      Purpose     :   Deleted hardware from the database, then removes the UI.
+// ********************************************************************************
+
 function deleteAHardware(hardwareId, parentId){
     $.ajax({
         method: 'DELETE',
@@ -1037,6 +1125,12 @@ function deleteAHardware(hardwareId, parentId){
         }
     });
 }
+
+// ********************************************************************************
+//      Author      :   Michael Barreiro
+//      DateTime    :   12-9-21
+//      Purpose     :   This creates a customer after passing form validation. Appends new Customer to the UI when done.
+// ********************************************************************************
 
 function createCustomer(){
     if($('#needCustomers')) $('#needCustomers').remove();
@@ -1140,6 +1234,12 @@ function createCustomer(){
         }
     });
 }
+
+// ********************************************************************************
+//      Author      :   Michael Barreiro
+//      DateTime    :   12-15-21
+//      Purpose     :   This deletes a customer frmo the databse. Then remvoes from the UI.
+// ********************************************************************************
 
 function deleteCustomer(id){
     $.ajax({

@@ -33,38 +33,7 @@ var JobSchema = new mongoose.Schema({
     },
     hardware: {
         type: Array
-        // required: "Required",
-        // default: [{
-        //     name: {
-        //         type: String,
-        //         required: "Required"
-        //     },
-        //     description: {
-        //         type: String,
-        //         required: "Required"
-        //     },
-        //     ipAddress: {
-        //         type: Number,
-        //         required: "Required"
-        //     },
-        //     subnetMask: {
-        //         type: Number,
-        //         required: "Required"
-        //     },
-        //     defaultMask: {
-        //         type: Number,
-        //         required: "Required"
-        //     },
-        //     username: {
-        //         type: String,
-        //         required: "Required"
-        //     },
-        //     password: {
-        //         type: String,
-        //         required: "Required"
-        //     }
-        // }]
     }
-}, { versionKey: false });
+}, { versionKey: false }); // versionKey is to refrain mongoose from adding a __v key to the schema, this is a mongoose versioning ability.
 
 mongoose.model("Job", JobSchema);

@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 mongoose.Promise = global.Promise;
 
-//Commonly inserted into env. Leaving this temporarily
+//Commonly inserted into env. Leaving this here temporarily
 mongoose.connect("mongodb+srv://mbuser:mbarreiro@cluster0.hong0.mongodb.net/customerConnectionDb?retryWrites=true&w=majority", (error) => {
     if(!error){
         console.log('Success!');

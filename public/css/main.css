@@ -23,10 +23,6 @@ body{
     
 }
 
-/* #header{
-    display: flex;
-} */
-
 td{
     border: 1px solid black !important;
     max-width: 155px;
@@ -45,6 +41,13 @@ td{
 
 .accordion-body{
     background-image: url('/img/pattern.png');
+}
+
+#noJobs{
+    text-align: center;
+    margin: 15px 0px 0;
+    font-size: 18px;
+    color: #7d7d7d;
 }
 
 .jobSelectBtn{
@@ -199,7 +202,6 @@ td > span {white-space: nowrap;}
 }
 
 #submitFuzzySearch:hover{
-    /* background-color: #23b571; */
     color: white;
     transition: all ease-in-out 0.2s;
 }

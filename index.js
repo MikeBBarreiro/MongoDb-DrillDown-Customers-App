@@ -18,7 +18,7 @@ app.use(express.static(__dirname + '/public')); //allows external css and js fil
 app.get("/", (req,res) => {
     res.render("index", {});
 })
-app.use("/", CustomerController.router, JobController.router) //this tells node which controller we'll be used here.
+app.use("/", CustomerController.router, JobController.router) //this tells node which controller we'll be used here at route /.
 
 app.listen("3000", () => {
     console.log("Server running on PORT: 3000");

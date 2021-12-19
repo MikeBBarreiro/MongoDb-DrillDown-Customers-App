@@ -7,7 +7,6 @@ const CustomerController = require("./customers");
 var ObjectId = require('mongodb').ObjectId; //Access to new ObjectId to create Id's from here for DB.
 
 router.post("/fuzzySearchJobs", function(req, res) {
-    var resultsArray = [];
     if (req.body.search) {
        const regex = new RegExp(escapeRegex(req.body.search), 'gi');
         JobModel.find({ $text: { $search: regex} }, function(err, returnedResults) {
@@ -21,8 +20,7 @@ router.post("/fuzzySearchJobs", function(req, res) {
     }
 });
 
-// url/course/list
-//Each job is fetched one at a time based off wich customer is selected to review.
+//Each job is fetched one at a time based off which customer is selected to review. This route is only called on click of a customer.
 router.post("/getJobByID/", (req, res) => {
     JobModel.find({parentId: req.body.id}, (err, docs) => {
         if(!err){
@@ -61,7 +59,7 @@ router.put("/updateJob/", (req, res) => {
             res.send("ERROR! :" + err);
         }
     }
-    ).lean(); //.lean is needed to make this fetch work.
+    ).lean(); //.lean is needed to make this update work.
 });
 
 router.delete("/deleteJobById", (req, res) => {
@@ -124,5 +122,3 @@ function escapeRegex(text) {
 module.exports = {
     router: router
 }
-// module.exports.removeJobs = removeJobs;
-//TODO OPTIMISE 2 controllers exporting each other has casued an issue with heper function read, look into this to optimise.
