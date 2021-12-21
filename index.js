@@ -3,6 +3,7 @@ const express = require("express");
 const app = express();
 const path = require("path"); //available from node
 const bodyParser = require("body-parser");
+const PORT = process.env.PORT || 3000
 
 //Controllers
 const CustomerController = require("./controllers/customers");
@@ -20,7 +21,9 @@ app.get("/", (req,res) => {
 })
 app.use("/", CustomerController.router, JobController.router) //this tells node which controller we'll be used here at route /.
 
-app.listen("3000", () => {
-    console.log("Server running on PORT: 3000");
+// Heroku dynamically assigns your app a port. Heroku adds the port to the env. 
+//PORT 3000 is for local Dev Enviromnet.
+app.listen(PORT, () => {
+    console.log(`Server running on PORT: ${PORT}` );
 })
 
