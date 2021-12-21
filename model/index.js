@@ -1,9 +1,14 @@
 const mongoose = require("mongoose");
+require('dotenv').config()
 
 mongoose.Promise = global.Promise;
 
+const DBUSER = process.env.DB_USER
+const DBPASS = process.env.DB_PASS
+
 //Commonly inserted into env. Leaving this here temporarily
-mongoose.connect("mongodb+srv://mbuser:mbarreiro@cluster0.hong0.mongodb.net/customerConnectionDb?retryWrites=true&w=majority", (error) => {
+// mongoose.connect("mongodb+srv://mbuser:mbarreiro@cluster0.hong0.mongodb.net/customerConnectionDb?retryWrites=true&w=majority", (error) => {
+mongoose.connect(`mongodb+srv://${DBUSER}:${DBPASS}@cluster0.hong0.mongodb.net/customerConnectionDb?retryWrites=true&w=majority`, (error) => {
     if(!error){
         console.log('Success!');
     }else {

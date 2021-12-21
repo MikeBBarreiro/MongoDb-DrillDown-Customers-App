@@ -90,7 +90,7 @@ router.post("/addHardware", (req, res) => {
     var data = req.body.obj;
     var id = new ObjectId();
     data._id = id;
-
+    console.log(data._id);
     JobModel.updateOne({_id: data.parentId}, { $push : {hardware : data}}, (err, docs) => {
         if(!err){
             res.send({text: 'New Hardware ' + req.body.obj.name + ', was added.', data: data});

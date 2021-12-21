@@ -32,8 +32,15 @@ var JobSchema = new mongoose.Schema({
         required: "Required"
     },
     hardware: {
-        type: Array
+        type: Array,
+        required: "Required",
+        default: [{
+            _id: {
+                type: mongoose.Schema.Types.ObjectId,
+                required: "Required"
+            }
+        }]
     }
-}, { versionKey: false }); // versionKey is to refrain mongoose from adding a __v key to the schema, this is a mongoose versioning ability.
+}, { versionKey: false });
 
 mongoose.model("Job", JobSchema);

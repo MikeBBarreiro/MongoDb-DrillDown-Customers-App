@@ -59,6 +59,8 @@ td{
     padding: 0 !important;
 }
 
+.updateJob:hover{cursor: pointer;}
+
 .jobSelectBtn:hover{
     cursor: pointer;
     background: linear-gradient(180deg, #1fa868 0%, #01c51b 100%);

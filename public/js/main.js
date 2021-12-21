@@ -1,3 +1,5 @@
+var baseUrl = window.location.href;
+
 $(document).ready(function() {
 
     // ********************************************************************************
@@ -311,7 +313,7 @@ function searchDataBase(value){
     $.ajax({
         method: 'POST',
         dateType: 'json',
-        url: 'http://localhost:3000/fuzzySearchCustomers', //URL OR ENDPOINT
+        url: baseUrl + 'fuzzySearchCustomers', //URL OR ENDPOINT
         data: {"search": value},
         success: function (res){
             $('.fa-circle-o-notch').addClass('fadeLoader');
@@ -329,7 +331,7 @@ function searchDataBase(value){
         $.ajax({
             method: 'POST',
             dateType: 'json',
-            url: 'http://localhost:3000/fuzzySearchJobs', //URL OR ENDPOINT
+            url: baseUrl + 'fuzzySearchJobs', //URL OR ENDPOINT
             data: {"search": value},
             success: function (res){
                 if(res){
@@ -374,7 +376,7 @@ function fetchCustomers() {
     $.ajax({
         method: 'GET', //GET OR POST
         dateType: 'json',
-        url: 'http://localhost:3000/getCustomers', //URL OR ENDPOINT
+        url: baseUrl + 'getCustomers', //URL OR ENDPOINT
         success: function (res) {
             if(res && res.data !== undefined){
                 var arr = res.data.reverse();
@@ -458,7 +460,7 @@ function fetchJobs(id){
         $.ajax({
             method: 'POST',
             dateType: 'json',
-            url: 'http://localhost:3000/getJobByID', //URL OR ENDPOINT
+            url: baseUrl + 'getJobByID', //URL OR ENDPOINT
             data: {"id": id},
             success: function (res){
                 var response = JSON.parse(res);
@@ -633,7 +635,7 @@ function updateEditedJob(jobId, updatedObj){
     $.ajax({
         method: 'PUT',
         dateType: 'json',
-        url: 'http://localhost:3000/updateJob',
+        url: baseUrl + 'updateJob',
         data: {"id": jobId, updatedJob: updatedObj},
         success: function (res){
             if(res){
@@ -680,7 +682,7 @@ function editCustomer(customerId, updatedObj){
     $.ajax({
         method: 'PUT',
         dateType: 'json',
-        url: 'http://localhost:3000/updateCustomer',
+        url: baseUrl + 'updateCustomer',
         data: {"id": customerId, "updatedObj": updatedObj},
         success: function (res){
             if(res){
@@ -741,7 +743,7 @@ function updateHardware(hardwareId, updatedHardware, parentId){
     $.ajax({
         method: 'PUT',
         dateType: 'json',
-        url: 'http://localhost:3000/updateHardware', //URL OR ENDPOINT
+        url: baseUrl + 'updateHardware', //URL OR ENDPOINT
         data: {"id": parentId, "updatedHardware": updatedHardware, "hId": hardwareId},
         success: function (res){
             if(res){
@@ -841,7 +843,7 @@ function addJob(id){
     $.ajax({
         method: 'POST',
         dateType: 'json',
-        url: 'http://localhost:3000/addAJob',
+        url: baseUrl + 'addAJob',
         data: {"obj": obj},
         success: function (res){
             var toastLiveExample = document.getElementById('liveToast');
@@ -909,7 +911,7 @@ function deleteAJob(jobId, parentId){
     $.ajax({
         method: 'DELETE',
         dateType: 'json',
-        url: 'http://localhost:3000/deleteJobById',
+        url: baseUrl + 'deleteJobById',
         data: {"id": jobId, "customerId": parentId},
         success: function (res){
 
@@ -1006,7 +1008,7 @@ function createHardware(jobId, customerId){
     $.ajax({
         method: 'POST',
         dateType: 'json',
-        url: 'http://localhost:3000/addHardware',
+        url: baseUrl + 'addHardware',
         data: {"obj": obj},
         success: function (res){
             var toastLiveExample = document.getElementById('liveToast');
@@ -1083,7 +1085,7 @@ function deleteAHardware(hardwareId, parentId){
     $.ajax({
         method: 'DELETE',
         dateType: 'json',
-        url: 'http://localhost:3000/deleteHardwareById',
+        url: baseUrl + 'deleteHardwareById',
         data: {"jobId": parentId, "hardwareId": hardwareId},
         success: function (res){
             const customerId = $('.mainTableForHardware').attr('id').split('hardwareTableCustomer')[1];
@@ -1103,7 +1105,7 @@ function deleteAHardware(hardwareId, parentId){
                     }
                  });
 
-                $.cookie('customer' + customerId, JSON.stringify(customerCookie), {expires: 10});
+                // $.cookie('customer' + customerId, JSON.stringify(customerCookie), {expires: 10});
             }
 
             var toastLiveExample = document.getElementById('liveToast');
@@ -1154,7 +1156,7 @@ function createCustomer(){
     $.ajax({
         method: 'POST',
         dateType: 'json',
-        url: 'http://localhost:3000/createCustomer', //URL OR ENDPOINT
+        url: baseUrl + 'createCustomer', //URL OR ENDPOINT
         data: {"obj": obj},
         success: function (res){
             var data = JSON.parse(res);
@@ -1245,7 +1247,7 @@ function deleteCustomer(id){
     $.ajax({
         method: 'DELETE',
         dateType: 'json',
-        url: 'http://localhost:3000/deleteCustomer',
+        url: baseUrl + 'deleteCustomer',
         data: {"id": id},
         success: function (res){
             $.removeCookie('customer' + id + '');
