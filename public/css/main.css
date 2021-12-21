@@ -260,6 +260,9 @@ td > span {white-space: nowrap;}
     line-height: 63px;
     width: fit-content;
     margin: auto;
+}
+
+.copyRightText > span{
     background-color: #c8c8c8;
     padding: 3px;
     border-radius: 6px;
