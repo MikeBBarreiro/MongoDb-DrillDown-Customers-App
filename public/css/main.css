@@ -230,3 +230,34 @@ td > span {white-space: nowrap;}
     box-shadow: 0 0 15px red !important;
     transition: all ease-in-out 0.5s;
 }
+
+#siteFooter{
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    font-size: 12px;
+    padding: 5px;
+}
+
+#technologies{
+    display: flex;
+    justify-content:center;
+}
+.nodeTech{
+    width: 10%;
+    margin: 10px 2%;
+}
+.mongoTech{
+    width: 25%;
+    margin: 10px 2%;
+}
+.jstech{
+    width: 10%;
+    margin: 10px 2%;
+}
+
+.copyRightText{
+    line-height: 63px;
+    width: fit-content;
+    margin: auto;
+}
